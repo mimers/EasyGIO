@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  a(href='https://accounts.growingio.com/oauth/authorize?client_id=MU6U1pi9U1FQPbNbaZZSZzG8WgErKxuB&redirect_uri=http://localhost:3000/growingio/code_callback') Connect GrowingIO
+  script(src='/javascripts/app.js')
+
