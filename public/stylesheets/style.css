@@ -1,8 +1,44 @@
 body {
-  padding: 50px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: black;
+  color: white;
 }
 
 a {
   color: #00B7FF;
+}
+
+
+ol.product-list {
+    list-style: none;
+}
+
+li.product-container {
+    flex: 0 0 0;
+    margin: 16px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 17px 3px #f50101;
+}
+
+.project-name {
+    background-color: #463f18;
+}
+
+ol.product-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(19, 218, 36, 0.81);
+    justify-content: space-around;
+}
+
+img.product-logo {
+    width: 140px;
+    height: 140px;
+}
+
+span.product-name {
+    display: block;
 }

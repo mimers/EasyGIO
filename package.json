@@ -13,6 +13,7 @@
     "express-session": "^1.14.1",
     "fetch": "^1.1.0",
     "grant-express": "^3.6.4",
+    "htmlparser2": "^3.9.1",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
     "node-fetch": "^1.6.0",

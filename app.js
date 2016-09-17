@@ -6,39 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var fetch = require('node-fetch');
-// var Grant = require('grant-express'),
-//     grant = new Grant({
-//         "server": {
-//             "protocol": "http",
-//             "host": "localhost:3000",
-//             "transport": "session",
-//             "state": true
-//         },
-//         "gio": {
-//             "authorize_url": "https://accounts.growingio.com/oauth/authorize",
-//             "access_url": "https://accounts.growingio.com/oauth/access_token",
-//             "oauth": 2,
-//             "key": "MU6U1pi9U1FQPbNbaZZSZzG8WgErKxuB",
-//             "secret": "17a00fbe97061ced8966ec24c21c3f1c2dea384a346d5b96d031c0d353bae7b9",
-//             "callback": "/growingio/callback"
-//         },
-//     });
-
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var app_icon = require('./routes/app-icon');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
-// app.use(session({
-//     secret: 'grant'
-// }))
-// app.use(grant)
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -48,19 +23,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/app-icon/:package', app_icon);
 
 app.get('/growingio/code_callback', function(req, res, next) {
     console.log(req.query);
     fetch('https://accounts.growingio.com/oauth/access_token', {
         method: 'POST',
-        // headers: {
-        //     'Content-Type': 'application/json',
-        //     'Accept-Type': 'application/json'
-        // },
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept-Type': 'application/json'
+        },
         body: JSON.stringify({
             grantType: "authorization_code",
             code: req.query.code,
+            clientId: process.env.KEY,
+            clientSecret: process.env.SECRET,
             clientId: 'MU6U1pi9U1FQPbNbaZZSZzG8WgErKxuB',
             clientSecret: '17a00fbe97061ced8966ec24c21c3f1c2dea384a346d5b96d031c0d353bae7b9'
         })
