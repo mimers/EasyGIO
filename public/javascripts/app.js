@@ -1,5 +1,6 @@
 var query = new URLSearchParams(location.search.slice(1));
 var token = localStorage.getItem("token");
+
 if (!token && query.get("token")) {
     console.log('token is ' + query.get("token"));
     token = query.get("token");
@@ -16,7 +17,6 @@ if (token) {
         }
     }).then((res) => {
         if (res.ok) {
-            document.querySelector("#connect-button").style.display = 'none';
             res.json().then((json) => {
                 window.json = json;
                 new Vue({
@@ -40,4 +40,6 @@ if (token) {
         }
     })
 
+} else {
+    location.href = "https://accounts.growingio.com/oauth/authorize?client_id=MU6U1pi9U1FQPbNbaZZSZzG8WgErKxuB&redirect_uri=http://" + location.host + "/growingio/code_callback";
 }

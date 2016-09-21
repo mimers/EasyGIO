@@ -9,7 +9,7 @@ var cheerio = require('cheerio');
 
 
 /* GET users listing. */
-router.get('/:spn', function(req, res, next) {
+router.get('/:platform/:spn', function(req, res, next) {
     console.log("fetch icon for " + req.params.spn);
     var spn = req.params.spn;
     if (!spn.match(/[\w+\.]+/)) {

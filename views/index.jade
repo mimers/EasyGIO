@@ -1,14 +1,18 @@
 extends layout
 
 block content
-  a(id="connect-button", href='https://accounts.growingio.com/oauth/authorize?client_id=MU6U1pi9U1FQPbNbaZZSZzG8WgErKxuB&redirect_uri=http://local.joker.li:5130/growingio/code_callback') Connect GrowingIO
   script(src="/javascripts/vue.min.js")
   div(id="container")
+    img(class="growing-logo", src="https://assets.growingio.com/assets/v2/logo_growingio.svg")
+    div(class="start-tip")= "请点击以下产品开始圈选"
     div(v-for="project in projects")
       div(class="project-name")= "{{ project.name }}"
       ol(class="product-list")
         li(v-for="product in project.products", class="product-container")
           a(href="growing.{{ product.urlSchema }}://growing/oauth2/token?source=joker&circleType=app")
-            span(class="product-name")= "{{ product.name }}"
-            img(class="product-logo", src="/app-icon/download/{{ product.spn }}")
+            img(class="product-logo", src="/app-icon/download/{{ product.platform }}/{{ product.spn }}")
+            div(class="product-info-container")
+              div(class="product-name")= "{{ product.name }}"
+              div(class="product-spn")= "{{ product.spn }}"
+              div(class="product-start-button")= "开启圈选"
   script(src='/javascripts/app.js')
