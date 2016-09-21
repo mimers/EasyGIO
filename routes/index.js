@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', host: req.host});
+  res.render('index', { title: 'GrowingIO', host: req.host});
 });
 
 module.exports = router;
