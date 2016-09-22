@@ -2,17 +2,19 @@ extends layout
 
 block content
   script(src="/javascripts/vue.min.js")
+  img(class="growing-logo", src="https://assets.growingio.com/assets/v2/logo_growingio.svg")
+  div(id="splash")=  "加载中…"
   div(id="container")
-    img(class="growing-logo", src="https://assets.growingio.com/assets/v2/logo_growingio.svg")
     div(class="start-tip")= "请点击以下产品开始圈选"
     div(v-for="project in projects")
       div(class="project-name")= "{{ project.name }}"
       ol(class="product-list")
         li(v-for="product in project.products", class="product-container")
-          a(href="growing.{{ product.urlSchema }}://growing/oauth2/token?source=joker&circleType=app")
+          a(href="growing.{{ product.urlSchema }}://growing/oauth2/token?source=joker&circleType=app", @click="startCircle")
             img(class="product-logo", src="/app-icon/download/{{ product.platform }}/{{ product.spn }}")
             div(class="product-info-container")
               div(class="product-name")= "{{ product.name }}"
               div(class="product-spn")= "{{ product.spn }}"
               div(class="product-start-button")= "开启圈选"
+    button(class="logout-button", @click="logout")= "退出"
   script(src='/javascripts/app.js')

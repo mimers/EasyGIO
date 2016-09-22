@@ -12,8 +12,13 @@ var cheerio = require('cheerio');
 router.get('/:platform/:spn', function(req, res, next) {
     console.log("fetch icon for " + req.params.spn);
     var spn = req.params.spn;
+    var android = req.params.platform == 'android';
+    if (!android) {
+        res.redirect("/images/app-icons/ios_default.png");
+        return;
+    }
     if (!spn.match(/[\w+\.]+/)) {
-        res.send(null);
+        res.redirect("/images/app-icons/android_default.png");
         return;
     }
     request("http://www.wandoujia.com/apps/" + req.params.spn, function(error, response, html) {

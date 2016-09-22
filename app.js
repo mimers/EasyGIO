@@ -46,12 +46,41 @@ app.get('/growingio/code_callback', function(req, res, next) {
         if (result.ok) {
             return result.json().then((json) => {
                 console.log(json);
-                // res.end(JSON.stringify(json));
-                res.redirect("/?token=" + json.accessToken);
+                global.token = json;
+                console.log("save token to global");
+                console.log(global.token);
+                res.redirect("/?token=" + json.accessToken + "&loginToken=" + json.loginToken + "&refreshToken=" + json.refreshToken);
             });
         }
     });
 });
+
+app.get('/dynamic-token', function(req, res, next) {
+    console.log(req.headers);
+    fetch('https://accounts.growingio.com/oauth/access_token', {
+        method: 'POST',
+        body: JSON.stringify({
+            grantType: "refresh_login_token",
+            refreshToken: req.headers['refreshToken'],
+            accessToken: req.headers['token']
+        })
+    }).then((result) => {
+        if (result.ok) {
+            result.json().then((json) => {
+                console.log(json);
+                res.send(json);
+            })
+        } else {
+            result.text().then((errMsg) => {
+                console.log(errMsg);
+                next();
+            });
+        }
+    }).catch((err) => {
+        next();
+    })
+}) 
+
 // res.end(req.query.code);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

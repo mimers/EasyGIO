@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'GrowingIO', host: req.host});
+    console.log("current global token ");
+    console.log(global.token);
+    res.render('index', { title: 'GrowingIO', host: req.host, loginToken: global.token ? global.token.loginToken : "" });
 });
 
 module.exports = router;
