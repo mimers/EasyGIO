@@ -9,8 +9,8 @@ var request = require('request');
 var cheerio = require('cheerio');
 var wandoujiaUrl = "http://www.wandoujia.com/apps/";
 var yybUrl = "http://sj.qq.com/myapp/detail.htm?apkName=";
-var androidDefaultImage = "/images/app-icons/android_default.svg";
-var iosDefaultImage = "/images/app-icons/ios_default.svg";
+var androidDefaultImage = "/images/app-icons/android_default.png";
+var iosDefaultImage = "/images/app-icons/ios_default.png";
 storage.init();
 
 

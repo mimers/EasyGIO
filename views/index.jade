@@ -2,7 +2,9 @@ extends layout
 
 block content
   script(src="/javascripts/vue.min.js")
-  img(class="growing-logo", src="https://assets.growingio.com/assets/v2/logo_growingio.svg")
+  div(class="logo-container")
+    button(class="logout-button", @click="logout")= "退出"
+    img(class="growing-logo", src="/images/logo.png")
   div(id="splash")=  "加载中…"
   div(id="container")
     div(class="start-tip")= "请点击以下产品开始圈选"
@@ -16,5 +18,4 @@ block content
               div(class="product-name")= "{{ product.name }}"
               div(class="product-spn")= "{{ product.spn }}"
               div(class="product-start-button")= "开启圈选"
-    button(class="logout-button", @click="logout")= "退出"
   script(src='/javascripts/app.js')
