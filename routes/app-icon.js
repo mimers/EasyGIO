@@ -9,6 +9,8 @@ var request = require('request');
 var cheerio = require('cheerio');
 var wandoujiaUrl = "http://www.wandoujia.com/apps/";
 var yybUrl = "http://sj.qq.com/myapp/detail.htm?apkName=";
+var androidDefaultImage = "/images/app-icons/android_default.svg";
+var iosDefaultImage = "/images/app-icons/ios_default.svg";
 storage.init();
 
 
@@ -19,11 +21,11 @@ router.get('/:platform/:spn', function(req, res, next) {
     var platform = req.params.platform;
     var android = req.params.platform == 'android';
     if (!android) {
-        res.redirect("/images/app-icons/ios_default.png");
+        res.redirect(iosDefaultImage);
         return;
     }
     if (!spn.match(/[\w+\.]+/)) {
-        res.redirect("/images/app-icons/android_default.png");
+        res.redirect(androidDefaultImage);
         return;
     }
     var storaygeKey = spn + "@" + platform;
@@ -54,7 +56,7 @@ router.get('/:platform/:spn', function(req, res, next) {
                     return;
                 }
             }
-            res.redirect("/images/app-icons/android_default.png");
+            res.redirect(androidDefaultImage);
         });
     });
 

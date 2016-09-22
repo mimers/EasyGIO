@@ -1,12 +1,21 @@
-var query = new URLSearchParams(location.search.slice(1));
 var token = localStorage.getItem("token");
 var isAndroid = navigator.userAgent.indexOf('Android') != -1;
 
-if (query.get("token")) {
-    token = query.get("token");
+function getJsonFromUrl() {
+    var query = location.search.substr(1);
+    var result = {};
+    query.split("&").forEach(function(part) {
+        var item = part.split("=");
+        result[item[0]] = decodeURIComponent(item[1]);
+    });
+    return result;
+}
+var query = getJsonFromUrl();
+if (query["token"]) {
+    token = query["token"];
     if (token) {
         localStorage.setItem("token", token);
-        localStorage.setItem("refreshToken", query.get("refreshToken"));
+        localStorage.setItem("refreshToken", query["refreshToken"]);
         location.href = location.pathname;
     }
 }
