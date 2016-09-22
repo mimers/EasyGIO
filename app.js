@@ -45,11 +45,7 @@ app.get('/growingio/code_callback', function(req, res, next) {
         console.log("got result " + result.body);
         if (result.ok) {
             return result.json().then((json) => {
-                console.log(json);
-                global.token = json;
-                console.log("save token to global");
-                console.log(global.token);
-                res.redirect("/?token=" + json.accessToken + "&loginToken=" + json.loginToken + "&refreshToken=" + json.refreshToken);
+                res.redirect("/?token=" + json.accessToken + "&refreshToken=" + json.refreshToken);
             });
         }
     });
