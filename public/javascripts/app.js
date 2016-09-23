@@ -85,6 +85,5 @@ if (token) {
         location.href = connectUrl;
     });
 } else {
-    alert("no token");
     location.href = connectUrl;
 }
