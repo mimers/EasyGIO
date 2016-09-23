@@ -1,6 +1,6 @@
 var token = localStorage.getItem("token");
 var isAndroid = navigator.userAgent.indexOf('Android') != -1;
-var connectUrl = "https://accounts.growingio.com/oauth/authorize?client_id=MU6U1pi9U1FQPbNbaZZSZzG8WgErKxuB&redirect_uri=http://" + location.host + "/growingio/code_callback";
+var connectUrl = "https://accounts.growingio.com/oauth/authorize?client_id=MU6U1pi9U1FQPbNbaZZSZzG8WgErKxuB&redirect_uri=" + location.origin + location.pathname + "/growingio/code_callback";
 
 function getJsonFromUrl() {
     var s = location.search.substr(1);
